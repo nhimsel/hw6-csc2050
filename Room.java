@@ -31,6 +31,10 @@ class Room
                 }
             }
         }
+        else if (direction.equals("show"))
+        {
+            //doesn't print anything. will trigger play() to loop and print again without error
+        }
         else
         {
             System.out.println("No exit in direction: " + direction);
