@@ -19,12 +19,11 @@ public class MonsterController extends Thread
         
         while(!KiLLSWiTCH)
         {
+            Dice d = new Dice(2);
             try 
             {
-                Thread.sleep(1000);
-                Dice d = new Dice(2);
-                int val = d.roll();
-                if(val == 1)
+                Thread.sleep(d.roll()+2); //movement time varies slightly
+                if(d.roll() == 1)
                 {
                     this.theMonster.myCurrentRoom.takeRandomExitForMonster();
                 }
