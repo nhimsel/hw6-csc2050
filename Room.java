@@ -31,6 +31,10 @@ class Room
                 }
             }
         }
+        else if (direction.equals("show"))
+        {
+            //doesn't print anything. will trigger play() to loop and print again without error
+        }
         else
         {
             System.out.println("No exit in direction: " + direction);
@@ -79,11 +83,28 @@ class Room
     {
         if(this.theMonster != null)
         {
-            //select a random exit from this room's exits 
-            //and have the monster enter that room
+            //randomly select the exit from available exits
+            Dice randomDie = new Dice(currNumberOfExits);
+            int exitNo = randomDie.roll() -1;
             
+            //set the new room on the monster
+            this.theMonster.setTheCurrentRoom(availableExits[exitNo].getDestinationRoom());
+
+            //move the monster to the new room
+            availableExits[exitNo].getDestinationRoom().setTheMonster(this.theMonster);
+
+            //System.out.println("\nMonster moved to " + this.theMonster.getTheCurrentRoom());
+
+            this.setTheMonster(null);
         }
     }
+    
+    @Override
+    public String toString()
+    {
+        return this.name;
+    }
+
     public void display()
     {
         System.out.println("Room: " + this.name);

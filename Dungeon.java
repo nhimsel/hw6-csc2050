@@ -6,6 +6,8 @@ public class Dungeon
     private String name;
     private Player thePlayer;
     private ArrayList<Room> theRooms = new ArrayList<Room>();
+	Monster theMonster;
+	MonsterController mc;
 
     public Dungeon(String name, Player thePlayer)
     {
@@ -19,9 +21,9 @@ public class Dungeon
 	    Room r6 = new Room("R6");
 	    r1.setThePlayer(thePlayer);
 	    
-	    Monster theMonster = new Monster("a troll");
+	    theMonster = new Monster("a troll");
 	    r1.setTheMonster(theMonster);
-	    MonsterController mc = new MonsterController(theMonster);
+	    mc = new MonsterController(theMonster);
 	    mc.start();
 	    
 	    r1.setThePlayer(this.thePlayer);
@@ -61,6 +63,10 @@ public class Dungeon
             
         }
         while(!line.equals("quit"));
+
+		//kill the monsterthread when the game ends
+		mc.KiLLSWiTCH_FLiP();
+
         System.out.println("Goodbye!");
     }
 }
